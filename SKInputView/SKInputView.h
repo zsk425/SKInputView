@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 
 @property (nonatomic) CGFloat textViewMaxHeight;
+@property (nonatomic, copy) NSString *placeholder;
 
 @end
 

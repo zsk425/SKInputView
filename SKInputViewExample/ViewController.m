@@ -23,6 +23,7 @@
     [super viewDidLoad];
     
     self.inputView.textViewMaxHeight = 75;
+    self.inputView.placeholder = @"想说的话...";
     [self.inputView.sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     
     [self installKeyboardNotifications];

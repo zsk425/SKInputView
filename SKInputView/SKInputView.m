@@ -80,6 +80,13 @@
     self.sendBtnBottomNLC.constant = (containerHeight - self.sendBtn.intrinsicContentSize.height) / 2;
 }
 
+- (void)setPlaceholder:(NSString *)plcaeholder
+{
+    _placeholder = plcaeholder;
+    
+    self.textPlaceholder.text = plcaeholder;
+}
+
 #pragma mark - User interactions
 - (IBAction)onSend:(id)sender
 {

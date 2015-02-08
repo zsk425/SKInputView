@@ -133,6 +133,7 @@
 				CB3260DF1A86F743006B68A0 /* SKInputView.xib */,
 			);
 			name = SKInputView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +435,7 @@
 				CB3260D71A86F599006B68A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB3260D81A86F599006B68A0 /* Build configuration list for PBXNativeTarget "SKInputViewExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +444,7 @@
 				CB3260DA1A86F599006B68A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
