@@ -11,7 +11,6 @@
 @interface SKInputView ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightNLC;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendBtnBottomNLC;
-@property (weak, nonatomic) IBOutlet UILabel *textPlaceholder;
 
 @end
 
@@ -80,11 +79,25 @@
     self.sendBtnBottomNLC.constant = (containerHeight - self.sendBtn.intrinsicContentSize.height) / 2;
 }
 
-- (void)setPlaceholder:(NSString *)plcaeholder
+#pragma mark - Public methods
+- (void)setText:(NSString *)text
 {
-    _placeholder = plcaeholder;
+    self.textView.text = text;
     
-    self.textPlaceholder.text = plcaeholder;
+    CGSize size = self.textView.contentSize;
+    size.height = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, CGFLOAT_MAX)].height;
+    self.textView.contentSize = size;
+    [self textViewDidChange:self.textView];
+}
+
+- (void)setAttributedText:(NSAttributedString *)text
+{
+    self.textView.attributedText = text;
+    
+    CGSize size = self.textView.contentSize;
+    size.height = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, CGFLOAT_MAX)].height;
+    self.textView.contentSize = size;
+    [self textViewDidChange:self.textView];
 }
 
 #pragma mark - User interactions
@@ -111,16 +124,20 @@
 {
     self.sendBtn.enabled = self.textPlaceholder.hidden = textView.text.length ? YES : NO;
     
-    if (self.textViewHeightNLC.constant != self.textView.contentSize.height)
+    //CGFloat newHeight = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom;
+    CGFloat newHeight = textView.contentSize.height;
+    if (self.textViewHeightNLC.constant != newHeight)
     {
-        CGFloat newHeight = self.textView.contentSize.height;
         if (self.textViewMaxHeight > 0.)
         {
-            newHeight = MIN(self.textViewMaxHeight, self.textView.contentSize.height);
+            newHeight = MIN(self.textViewMaxHeight, newHeight);
         }
         
         self.textViewHeightNLC.constant = newHeight;
-        [self setNeedsUpdateConstraints];
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self setNeedsUpdateConstraints];
+            [self.superview layoutIfNeeded];
+        } completion:nil];
     }
     
     if ([self.delegate respondsToSelector:@selector(textViewDidChange:)])

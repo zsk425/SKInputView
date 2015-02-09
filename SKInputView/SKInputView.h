@@ -20,9 +20,12 @@
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet UILabel *textPlaceholder;
 
 @property (nonatomic) CGFloat textViewMaxHeight;
-@property (nonatomic, copy) NSString *placeholder;
+
+- (void)setText:(NSString *)text;
+- (void)setAttributedText:(NSAttributedString *)text;
 
 @end
 
